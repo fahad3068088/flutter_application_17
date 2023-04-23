@@ -18,11 +18,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final classInstancee = Provider.of<Cart>(context);
+ 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Consumer<Cart>(builder: ((context, classInstancee, child) {
-            return Row(
+          Row(
               children: [
                 Stack(
                   children: [
@@ -54,13 +55,12 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
-            );
-          })),
+            )
+      
         ],
         backgroundColor: Colors.amber,
-        title: Consumer<Cart>(builder: ((context, classInstancee, child) {
-          return Text(classInstancee.dd);
-        })),
+        title:  Text(classInstancee.dd),
+        
       ),
       body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -73,12 +73,12 @@ class _HomeState extends State<Home> {
             return GridTile(
               child: GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DDart(
-                                pro: itme[index],
-                              )),
+                   Navigator.push(
+                   context,
+                  MaterialPageRoute(
+                 builder: (context) => DDart(
+                  pro: itme[index],
+                    )),
                     );
                   },
                   child: Image.asset(itme[index].imgePath)),
@@ -86,14 +86,13 @@ class _HomeState extends State<Home> {
                 subtitle: Text(itme[index].nema,
                     style: const TextStyle(
                         fontSize: 22, color: Color.fromARGB(255, 214, 22, 22))),
-                trailing: Consumer<Cart>(builder: ((context, classI, child) {
-                  return IconButton(
+                trailing: IconButton(
                       color: const Color.fromARGB(255, 62, 94, 70),
                       onPressed: () {
-                        classI.agg(itme[index]);
+                        classInstancee.agg(itme[index]);
                       },
-                      icon: const Icon(Icons.add));
-                })),
+                      icon: const Icon(Icons.add)),
+               
 
                 leading: Text("\$ ${itme[index].bb}"),
 //
