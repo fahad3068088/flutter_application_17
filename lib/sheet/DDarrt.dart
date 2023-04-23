@@ -3,13 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_16/model/itme.dart';
 
-
-
-
-
-
-
-
 class DDart extends StatefulWidget {
   Itme pro;
   DDart({super.key, required this.pro});
@@ -22,7 +15,6 @@ class _DDartState extends State<DDart> {
   bool fahad = true;
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -61,10 +53,7 @@ class _DDartState extends State<DDart> {
           ),
         ],
         backgroundColor: Colors.amber,
-
-        title: 
-        
-        Text("Home"),
+        title: Text("Home"),
       ),
       body: SingleChildScrollView(
         child: Column(
