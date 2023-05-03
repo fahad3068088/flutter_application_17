@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class fahad extends StatefulWidget {
+  const fahad({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<fahad> createState() => _fahadState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _fahadState extends State<fahad> {
   @override
   Widget build(BuildContext context) {
-    return FutureProvider(
-    
-  create: (context) => Future.value(42),
-  initialData: null,
-  child: MyWidget(),
-);
-
-
+    return const CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Text("ggggggggggggggggggggggggggggg"),
+          // floating: false,
+          // flexibleSpace: Placeholder(),
+          expandedHeight: 200,
+        ),
+      ],
+    );
   }
-}
-
-Widget build(BuildContext context) {
-  final value = context.watch<int>();
-  return Text('$value');
 }

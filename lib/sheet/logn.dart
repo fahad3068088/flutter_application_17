@@ -66,7 +66,7 @@ class loggn extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const scinUP()),
+                    MaterialPageRoute(builder: (context) =>  scinUP()),
                   );
                 },
                 child: Text('تسجيل حساب ',

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
@@ -8,8 +9,41 @@ import '../const/conss.dart';
 import 'logn.dart';
 
 // ignore: camel_case_types
-class scinUP extends StatelessWidget {
-  const scinUP({super.key});
+class scinUP extends StatefulWidget {
+   const scinUP({super.key});
+
+  @override
+  State<scinUP> createState() => _scinUPState();
+}
+
+class _scinUPState extends State<scinUP> {
+  final myController = TextEditingController();
+  final byController = TextEditingController();
+
+
+red()async{
+  try {
+  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: myController.text,
+    password: byController.text,
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+} catch (e) {
+  print(e);
+}
+}
+@override
+  void dispose() {
+    // TODO: implement dispose
+    myController.dispose();
+    byController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +62,7 @@ class scinUP extends StatelessWidget {
               height: 64,
             ),
             TextField(
+               controller: myController,
               keyboardType: TextInputType.emailAddress,
               obscureText: false,
               decoration: aaa.copyWith(hintText: "Enter Your emil : "),
@@ -36,6 +71,7 @@ class scinUP extends StatelessWidget {
               height: 33,
             ),
             TextField(
+               controller: byController,
               keyboardType: TextInputType.emailAddress,
               obscureText: false,
               decoration: aaa.copyWith(hintText: "Enter Your paSsbord : "),
@@ -52,7 +88,7 @@ class scinUP extends StatelessWidget {
               height: 33,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {red();},
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.black),
                 padding: MaterialStateProperty.all(EdgeInsets.all(12)),

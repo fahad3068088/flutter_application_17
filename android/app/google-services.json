@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "555257753449",
+    "project_id": "fahad-123-38921",
+    "storage_bucket": "fahad-123-38921.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555257753449:android:3356b7869be3ad967617f8",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_16"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555257753449-qgg040aulvsnrlg7bcmegdmsl8gcph68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxg_inmmzeoor5IN2NNUq7r3aow5ZzAiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555257753449-qgg040aulvsnrlg7bcmegdmsl8gcph68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
