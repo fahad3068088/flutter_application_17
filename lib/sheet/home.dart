@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_16/model/App.dart';
 import 'package:flutter_application_16/sheet/shetout.dart';
@@ -87,7 +88,7 @@ class _HomeState extends State<Home> {
                       )),
                 ),
                 ListTile(
-                    title: Text("Home"),
+                    title: Text("الرئيسية"),
                     leading: Icon(Icons.home),
                     onTap: () {
                       Navigator.push(
@@ -98,7 +99,7 @@ class _HomeState extends State<Home> {
                       );
                     }),
                 ListTile(
-                    title: Text("My products"),
+                    title: Text("سلة المشتريات"),
                     leading: Icon(Icons.add_shopping_cart),
                     onTap: () {
                       Navigator.push(
@@ -109,13 +110,15 @@ class _HomeState extends State<Home> {
                       );
                     }),
                 ListTile(
-                    title: Text("About"),
+                    title: Text("عن المتجر"),
                     leading: Icon(Icons.help_center),
                     onTap: () {}),
                 ListTile(
-                    title: Text("Logout"),
+                    title: Text("تسجيل الخروج"),
                     leading: Icon(Icons.exit_to_app),
-                    onTap: () {}),
+                    onTap: () async {
+                      await FirebaseAuth.instance.signOut();
+                    }),
               ],
             ),
             Container(

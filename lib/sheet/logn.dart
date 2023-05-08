@@ -1,19 +1,46 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_16/sheet/home.dart';
 import 'package:flutter_application_16/sheet/scinUP.dart';
-
 
 import '../const/color.dart';
 import '../const/conss.dart';
+import 'error.dart';
 
 // ignore: camel_case_types
-class loggn extends StatelessWidget {
+class loggn extends StatefulWidget {
   const loggn({super.key});
 
   @override
+  State<loggn> createState() => _loggnState();
+}
+
+class _loggnState extends State<loggn> {
+  final myController = TextEditingController();
+
+  final byController = TextEditingController();
+
+  rre() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: myController.text, password: byController.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        showSnackBar(context, "اسم المستخدم غير مسجل");
+        // print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        showSnackBar(context, "كلمة المرور خاطئة");
+      } else {
+        showSnackBar(context, "يبدو انه لايوجد نت ارجو المحاولة في وقت اخر");
+      }
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: appbarGreen,
       body: Padding(
@@ -28,6 +55,7 @@ class loggn extends StatelessWidget {
             height: 64,
           ),
           TextField(
+            controller: myController,
             keyboardType: TextInputType.emailAddress,
             obscureText: false,
             decoration: aaa.copyWith(hintText: "Enter Your emil : "),
@@ -36,6 +64,7 @@ class loggn extends StatelessWidget {
             height: 33,
           ),
           TextField(
+            controller: byController,
             keyboardType: TextInputType.emailAddress,
             obscureText: false,
             decoration: aaa.copyWith(hintText: "Enter Your paSsbord : "),
@@ -44,7 +73,9 @@ class loggn extends StatelessWidget {
             height: 33,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              rre();
+            },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.black),
               padding: MaterialStateProperty.all(EdgeInsets.all(12)),
@@ -66,7 +97,7 @@ class loggn extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) =>  scinUP()),
+                    MaterialPageRoute(builder: (context) => scinUP()),
                   );
                 },
                 child: Text('تسجيل حساب ',
