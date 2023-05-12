@@ -3,7 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:email_validator/email_validator.dart';
 import '../const/color.dart';
 import '../const/conss.dart';
 import 'logn.dart';
@@ -22,6 +21,22 @@ class _scinUPState extends State<scinUP> {
   final byController = TextEditingController();
   bool clk = false;
   bool vbn = true;
+
+
+
+
+ bool ispassord8 =false;
+changPassord(String passord){
+  setState(() {
+    if (passord.contains(RegExp(r'.{6,}'))){
+      ispassord8 =true;
+    }
+  });
+
+
+}
+
+
 
   red() async {
     setState(() {
@@ -58,7 +73,7 @@ class _scinUPState extends State<scinUP> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appbarGreen,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         // ignore: prefer_const_literals_to_create_immutables
@@ -75,41 +90,47 @@ class _scinUPState extends State<scinUP> {
               ),
               TextFormField(
                 validator: (value) {
-                  return value != null && !EmailValidator.validate(value)
-                      ? "الايميل خطاء"
-                      : null;
+                  return value!.contains(RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+                      ? null
+                      : "الايميل غير صحيح";
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: myController,
                 keyboardType: TextInputType.emailAddress,
                 obscureText: false,
                 decoration: aaa.copyWith(
-                   suffixIcon :Icon(Icons.email,color: Colors.black),
-                  hintText: "Enter Your emil : "),
+                    border: UnderlineInputBorder(),
+                    labelText: 'Enter your username',
+                    suffixIcon: Icon(Icons.email, color: Colors.black),
+                    hintText: "Enter Your emil : "),
               ),
               const SizedBox(
                 height: 33,
               ),
               TextFormField(
+                onChanged: (passord) {
+                  changPassord( passord);
+                },
                 validator: (value) {
-                  return value!.length < 6
-                      ? "كلمة السر لاتستوفسي الشروط"
-                      : null;
+                  return value!.contains(RegExp(r'(\w+)')) ? null : "hhhhhhhh";
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: byController,
                 keyboardType: TextInputType.emailAddress,
-                obscureText: vbn?true:false,
+                obscureText: vbn ? true : false,
                 decoration: aaa.copyWith(
-                  suffixIcon :IconButton(
+                  suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        vbn=!vbn;
+                        vbn = !vbn;
                       });
                     },
-                    icon:vbn? Icon(Icons. visibility_off):Icon(Icons. visibility),),
+                    icon: vbn
+                        ? Icon(Icons.visibility_off)
+                        : Icon(Icons.visibility),
+                  ),
                   hintText: "Enter Your paSsbord : ",
-                
                 ),
               ),
               const SizedBox(
@@ -119,11 +140,122 @@ class _scinUPState extends State<scinUP> {
                 keyboardType: TextInputType.emailAddress,
                 obscureText: false,
                 decoration: aaa.copyWith(
-                  suffixIcon :Icon(Icons.add_call,color: Colors.black),
-                  hintText: "Enter Your mobail : "),
+                    suffixIcon: Icon(Icons.add_call, color: Colors.black),
+                    hintText: "Enter Your mobail : "),
               ),
               const SizedBox(
                 height: 33,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color:ispassord8?Colors.green:  Colors.white,),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color:  Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("عدد الخانات :8"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color:  Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("عدد الخانات :6"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color:  Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("عدد الخانات :6"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color:  Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("عدد الخانات :6"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromARGB(255, 10, 9, 9)),
+                      shape: BoxShape.circle,
+                      color: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("عدد الخانات :6"),
+              ]),
+              SizedBox(
+                height: 15,
               ),
               ElevatedButton(
                 onPressed: () {

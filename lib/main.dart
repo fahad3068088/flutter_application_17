@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         return Cart();
       },
       child: const MaterialApp(
-        home: Home(),
+        home: scinUP(),
       ),
     );
   }
