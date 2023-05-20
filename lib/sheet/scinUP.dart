@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../const/color.dart';
 import '../const/conss.dart';
+import 'error.dart';
 import 'logn.dart';
 
 // ignore: camel_case_types
@@ -22,21 +23,36 @@ class _scinUPState extends State<scinUP> {
   bool clk = false;
   bool vbn = true;
 
+ bool hasUppercase = false;
+bool hasDigits = false;
+bool hasLowercase = false;
+bool hasSpecialCharacters = false;
+bool hasMin8Characters = false;
+  changPassord(String passord) {
+    setState(() {
+ hasUppercase = false;
+ hasDigits = false;
+ hasLowercase = false;
+ hasSpecialCharacters = false;
+ hasMin8Characters = false;
 
-
-
- bool ispassord8 =false;
-changPassord(String passord){
-  setState(() {
-    if (passord.contains(RegExp(r'.{6,}'))){
-      ispassord8 =true;
-    }
-  });
-
-
-}
-
-
+      if (passord.contains(RegExp(r'.{6,}'))) {
+        hasMin8Characters = true;
+      }
+       if (passord.contains (RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+        hasSpecialCharacters = true;
+      }
+       if (passord.contains(RegExp(r'[a-z]'))) {
+        hasLowercase = true;
+      }
+       if (passord.contains(RegExp(r'[0-9]'))) {
+        hasDigits = true;
+      }
+       if (passord.contains(RegExp(r'[A-Z]'))) {
+        hasUppercase = true;
+      }
+    });
+  }
 
   red() async {
     setState(() {
@@ -69,6 +85,7 @@ changPassord(String passord){
     byController.dispose();
     super.dispose();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +127,7 @@ changPassord(String passord){
               ),
               TextFormField(
                 onChanged: (passord) {
-                  changPassord( passord);
+                  changPassord(passord);
                 },
                 validator: (value) {
                   return value!.contains(RegExp(r'(\w+)')) ? null : "hhhhhhhh";
@@ -151,98 +168,10 @@ changPassord(String passord){
                   height: 25,
                   width: 25,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red),
-                      shape: BoxShape.circle,
-                      color:ispassord8?Colors.green:  Colors.white,),
-                  child: Icon(
-                    Icons.check,
-                    size: 15,
-                    color:  Colors.white,
+                    border: Border.all(color: Colors.red),
+                    shape: BoxShape.circle,
+                    color: hasMin8Characters ? Colors.green : Colors.white,
                   ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("عدد الخانات :8"),
-              ]),
-              SizedBox(
-                height: 15,
-              ),
-              Row(children: [
-                Container(
-                  height: 25,
-                  width: 25,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red),
-                      shape: BoxShape.circle,
-                      color: Colors.white),
-                  child: Icon(
-                    Icons.check,
-                    size: 15,
-                    color:  Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("عدد الخانات :6"),
-              ]),
-              SizedBox(
-                height: 15,
-              ),
-              Row(children: [
-                Container(
-                  height: 25,
-                  width: 25,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red),
-                      shape: BoxShape.circle,
-                      color: Colors.white),
-                  child: Icon(
-                    Icons.check,
-                    size: 15,
-                    color:  Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("عدد الخانات :6"),
-              ]),
-              SizedBox(
-                height: 15,
-              ),
-              Row(children: [
-                Container(
-                  height: 25,
-                  width: 25,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red),
-                      shape: BoxShape.circle,
-                      color: Colors.white),
-                  child: Icon(
-                    Icons.check,
-                    size: 15,
-                    color:  Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("عدد الخانات :6"),
-              ]),
-              SizedBox(
-                height: 15,
-              ),
-              Row(children: [
-                Container(
-                  height: 25,
-                  width: 25,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color.fromARGB(255, 10, 9, 9)),
-                      shape: BoxShape.circle,
-                      color: Colors.white),
                   child: Icon(
                     Icons.check,
                     size: 15,
@@ -257,10 +186,103 @@ changPassord(String passord){
               SizedBox(
                 height: 15,
               ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color:hasDigits?Colors.green: Colors.white,),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("ارقام"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color:hasSpecialCharacters?Colors.green: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("رموز"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      shape: BoxShape.circle,
+                      color:hasLowercase?Colors.green: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("حروف"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
+              Row(children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Color.fromARGB(255, 10, 9, 9)),
+                      shape: BoxShape.circle,
+                      color:hasUppercase? Colors.green: Colors.white),
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("احرف كبيره"),
+              ]),
+              SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: ()async {
                   if (fff.currentState!.validate()) {
-                    red();
+                  await  red();
+                    if (!mounted) return;
+                     Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  loggn()),
+                      );
                   } else {
                     print("خطاء ما");
                   }

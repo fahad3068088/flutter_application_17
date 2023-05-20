@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_16/sheet/home.dart';
 import 'package:flutter_application_16/sheet/scinUP.dart';
 
-import '../const/color.dart';
+
 import '../const/conss.dart';
 import 'error.dart';
 
@@ -21,6 +21,10 @@ class _loggnState extends State<loggn> {
   final myController = TextEditingController();
 
   final byController = TextEditingController();
+
+
+
+
 
   rre() async {
     try {
@@ -38,17 +42,23 @@ class _loggnState extends State<loggn> {
       showSnackBar(context, e.toString());
     }
   }
+  void dispose() {
+    // TODO: implement dispose
+    myController.dispose();
+    byController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appbarGreen,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         // ignore: prefer_const_literals_to_create_immutables
         child: Column(children: [
           Text(
-            "datتتتتتa",
+            "صفحة تسجيل الدخول",
             style: TextStyle(fontSize: 22),
           ),
           const SizedBox(
@@ -73,8 +83,9 @@ class _loggnState extends State<loggn> {
             height: 33,
           ),
           ElevatedButton(
-            onPressed: () {
-              rre();
+            onPressed: () async {
+              await rre();
+           if (!mounted) return;
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.black),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_16/sheet/DDarrt.dart';
+import 'package:flutter_application_16/sheet/error.dart';
 import 'package:flutter_application_16/sheet/home.dart';
 import 'package:flutter_application_16/sheet/logn.dart';
 import 'package:flutter_application_16/sheet/shetout.dart';
@@ -25,8 +26,18 @@ class MyApp extends StatelessWidget {
       create: (context) {
         return Cart();
       },
-      child: const MaterialApp(
-        home: scinUP(),
+      child: MaterialApp(
+        home: StreamBuilder(
+           stream: FirebaseAuth.instance.authStateChanges(),
+          builder:(context, snapshot) {
+           
+         if(snapshot.hasData){
+           return const Home();
+         }else{
+          return const loggn();
+         }
+          }
+          )
       ),
     );
   }
