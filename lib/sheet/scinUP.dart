@@ -90,6 +90,11 @@ bool hasMin8Characters = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 60, 153, 97),
+        title: Center(child: Text("تسجيل جديد",
+        style: TextStyle(fontSize: 26,color: Colors.black),)),
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -99,7 +104,7 @@ bool hasMin8Characters = false;
             key: fff,
             child: Column(children: [
               Text(
-                "datنننننننa",
+                "مرحبا بك",
                 style: TextStyle(fontSize: 22),
               ),
               const SizedBox(
@@ -118,7 +123,7 @@ bool hasMin8Characters = false;
                 obscureText: false,
                 decoration: aaa.copyWith(
                     border: UnderlineInputBorder(),
-                    labelText: 'Enter your username',
+                    labelText: 'Enter your emil',
                     suffixIcon: Icon(Icons.email, color: Colors.black),
                     hintText: "Enter Your emil : "),
               ),

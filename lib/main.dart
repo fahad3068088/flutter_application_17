@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Providers/card.dart';
 import 'fahad/fahad.dart';
+import 'sheet/VerifyEmailPage.dart';
 import 'sheet/scinUP.dart';
 
 Future<void> main() async {
@@ -27,18 +28,25 @@ class MyApp extends StatelessWidget {
         return Cart();
       },
       child: MaterialApp(
-        home: StreamBuilder(
-           stream: FirebaseAuth.instance.authStateChanges(),
-          builder:(context, snapshot) {
-           
-         if(snapshot.hasData){
-           return const Home();
-         }else{
-          return const loggn();
-         }
-          }
-          )
-      ),
+          home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ));
+                } else if (snapshot.hasError) {
+                  return showSnackBar(context, "Something went wrong");
+                }
+                if (snapshot.hasData) {
+                  return VerifyEmailPage();
+                  
+                
+                } else {
+                  return const loggn();
+                }
+              })),
     );
   }
 }
